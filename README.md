@@ -1,27 +1,50 @@
-# NgxIntlPhoneInput
+# intl-phone-input
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+> Accessible, headless Angular 17 international phone input with country selector.
 
-## Development server
+Built as a drop-in replacement for `ngx-intl-tel-input`, with fixes for known
+validation issues with Suriname (+597) and Russia/Kazakhstan (+7) numbers.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Status
 
-## Code scaffolding
+🚧 Under active development — not yet published to npm.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+- 🌍 Country selector with flag emoji, searchable by name, ISO code, or dial code
+- 📞 Phone validation via `libphonenumber-js` (latest metadata)
+- 🎭 Input masking via `angular-imask`, dynamically generated per country
+- 🎨 Fully headless — zero default styles, 100% customizable
+- ♿ Keyboard navigable dropdown via Angular CDK
+- 📋 `ngModel` support via `ControlValueAccessor`
+- ✅ Built-in Angular validator (`invalidPhone` error key)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Peer Dependencies
 
-## Running unit tests
+- `@angular/common`, `@angular/core`, `@angular/forms` `^17.0.0`
+- `@angular/cdk ^17.0.0`
+- `angular-imask ^7.0.0`
+- `imask ^7.0.0`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Development
 
-## Running end-to-end tests
+```bash
+# Install dependencies
+npm install
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+# Run demo app
+npm start
 
-## Further help
+# Run tests
+npm test
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+# Run tests with coverage
+npm run test:coverage
+
+# Build library
+npm run build:lib
+```
+
+## License
+
+MIT
