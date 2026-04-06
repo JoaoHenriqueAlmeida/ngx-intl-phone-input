@@ -1,0 +1,32 @@
+{
+  "name": "intl-phone-input",
+  "version": "0.1.0",
+  "description": "Accessible, headless Angular 17 international phone input with country selector",
+  "keywords": [
+    "angular",
+    "phone",
+    "international",
+    "phone-input",
+    "country-selector",
+    "imask",
+    "libphonenumber"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "peerDependencies": {
+    "@angular/common": "^17.0.0",
+    "@angular/core": "^17.0.0",
+    "@angular/forms": "^17.0.0",
+    "@angular/cdk": "^17.0.0",
+    "angular-imask": "^7.0.0",
+    "imask": "^7.0.0"
+  },
+  "dependencies": {
+    "libphonenumber-js": "^1.11.0"
+  },
+  "sideEffects": false
+}
