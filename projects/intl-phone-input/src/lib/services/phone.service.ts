@@ -15,6 +15,8 @@ import { CountryCode } from '../types';
  */
 export interface ParseResult {
   valid: boolean;
+  /** True when the number length is plausible for the country, even if not fully valid */
+  isPossible: boolean;
   /** E.164 string (e.g. '+5578509292') — only present when valid is true */
   e164: string | null;
   /** The parsed PhoneNumber object — only present when valid is true */
@@ -34,7 +36,7 @@ export class PhoneService {
    */
   parse(raw: string, iso: CountryCode): ParseResult {
     if (!raw?.trim()) {
-      return { valid: false, e164: null, phoneNumber: null };
+      return { valid: false, isPossible: false, e164: null, phoneNumber: null };
     }
 
     try {
@@ -59,11 +61,12 @@ export class PhoneService {
 
       return {
         valid,
+        isPossible: callingCodeMatches && phoneNumber.isPossible(),
         e164: valid ? phoneNumber.format('E.164') : null,
         phoneNumber: valid ? phoneNumber : null,
       };
     } catch {
-      return { valid: false, e164: null, phoneNumber: null };
+      return { valid: false, isPossible: false, e164: null, phoneNumber: null };
     }
   }
 

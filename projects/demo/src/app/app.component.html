@@ -15,6 +15,7 @@
         [defaultCountry]="defaultCountry"
         placeholder="Enter phone number"
         (countryChange)="onCountryChange($event)"
+        (phoneStatus)="onPhoneStatus($event)"
       />
     </div>
 
@@ -27,20 +28,38 @@
         <span class="label">Selected country:</span>
         <code>{{ selectedCountryIso }}</code>
       </div>
+      <div class="output-row">
+        <span class="label">Is possible:</span>
+        @if (status) {
+          <span
+            class="badge"
+            [class.badge--yes]="status.isPossible"
+            [class.badge--no]="!status.isPossible"
+          >
+            {{ status.isPossible ? "yes" : "no" }}
+          </span>
+        } @else {
+          <code>—</code>
+        }
+      </div>
+      <div class="output-row">
+        <span class="label">Is valid:</span>
+        @if (status) {
+          <span
+            class="badge"
+            [class.badge--yes]="status.isValid"
+            [class.badge--no]="!status.isValid"
+          >
+            {{ status.isValid ? "yes" : "no" }}
+          </span>
+        } @else {
+          <code>—</code>
+        }
+      </div>
+      <div class="output-row">
+        <span class="label">E.164:</span>
+        <code>{{ status?.e164 ?? "null" }}</code>
+      </div>
     </div>
-  </section>
-
-  <section class="demo-card">
-    <h2>Known issues fixed</h2>
-    <ul>
-      <li>
-        <strong>Russia (+7 926 920 9992)</strong> — previously auto-switched to
-        Kazakhstan (KZ). Now: select RU above and type <code>9269209992</code>.
-      </li>
-      <li>
-        <strong>Suriname (+597 850 9292)</strong> — previously never marked
-        valid. Select the country and type <code>8509292</code>.
-      </li>
-    </ul>
   </section>
 </div>

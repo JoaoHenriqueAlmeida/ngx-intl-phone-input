@@ -12,7 +12,7 @@ export interface CountryData {
   name: string;
   /** Dial code without '+', e.g. '55', '1', '7' */
   dialCode: string;
-  /** Unicode flag emoji derived from ISO code */
+  /** CDN URL of the country flag SVG, e.g. 'https://cdn.kcak11.com/CountryFlags/countries/br.svg' */
   flag: string;
 }
 

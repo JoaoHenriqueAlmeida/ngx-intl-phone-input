@@ -1,7 +1,14 @@
+@import "@angular/cdk/overlay-prebuilt.css";
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
 }
 
 body {
@@ -32,8 +39,9 @@ body {
   }
 
   .ipi-flag {
-    font-size: 1.1rem;
-    line-height: 1;
+    width: 20px;
+    height: 15px;
+    flex-shrink: 0;
   }
 
   .ipi-dial-code {
@@ -105,6 +113,7 @@ body {
   padding: 0.45rem 0.75rem;
   cursor: pointer;
   font-size: 0.875rem;
+  background: #f8fafc;
 
   &:hover,
   &.ipi-country-option--active {
@@ -113,12 +122,12 @@ body {
 
   &.ipi-country-option--selected {
     font-weight: 600;
-    color: #1d4ed8;
+    color: #4265c7;
   }
 
   &__flag {
-    font-size: 1.1rem;
-    line-height: 1;
+    width: 20px;
+    height: 15px;
     flex-shrink: 0;
   }
 

@@ -5,10 +5,19 @@
   role="combobox"
   [attr.aria-expanded]="isOpen"
   [attr.aria-haspopup]="'listbox'"
-  [attr.aria-activedescendant]="isOpen ? (keyManager?.activeItem?.id ?? null) : null"
+  [attr.aria-activedescendant]="
+    isOpen ? (keyManager?.activeItem?.id ?? null) : null
+  "
   (click)="openDropdown()"
-  (keydown)="onTriggerKeydown($event)">
-  <span class="ipi-flag">{{ selectedCountry.flag }}</span>
+  (keydown)="onTriggerKeydown($event)"
+>
+  <img
+    class="ipi-flag"
+    [src]="selectedCountry.flag"
+    [alt]="selectedCountry.name"
+    width="20"
+    height="15"
+  />
   <span class="ipi-dial-code">+{{ selectedCountry.dialCode }}</span>
 </button>
 
@@ -19,7 +28,8 @@
       type="text"
       [formControl]="searchCtrl"
       autocomplete="off"
-      placeholder="Search countries…" />
+      placeholder="Search countries…"
+    />
     <ul class="ipi-country-list" role="listbox">
       @for (country of filteredCountries; track country.iso) {
         <li
@@ -27,11 +37,20 @@
           [country]="country"
           [isSelected]="country.iso === selectedCountry.iso"
           class="ipi-country-option"
-          [class.ipi-country-option--selected]="country.iso === selectedCountry.iso"
-          (click)="selectCountry(country)">
-          <span class="ipi-country-option__flag">{{ country.flag }}</span>
+          [class.ipi-country-option--selected]="
+            country.iso === selectedCountry.iso
+          "
+          (click)="selectCountry(country)"
+        >
+          <img
+            class="ipi-country-option__flag"
+            [src]="country.flag"
+            [alt]="country.name"
+          />
           <span class="ipi-country-option__name">{{ country.name }}</span>
-          <span class="ipi-country-option__dial-code">+{{ country.dialCode }}</span>
+          <span class="ipi-country-option__dial-code"
+            >+{{ country.dialCode }}</span
+          >
         </li>
       }
     </ul>

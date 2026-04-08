@@ -28,6 +28,12 @@ import { CountryService } from '../../services/country.service';
 import { PhoneService } from '../../services/phone.service';
 import { CountrySelectorComponent } from '../country-selector/country-selector.component';
 
+export interface PhoneStatus {
+  isPossible: boolean;
+  isValid: boolean;
+  e164: string | null;
+}
+
 @Component({
   selector: 'ngx-intl-phone-input',
   standalone: true,
@@ -50,6 +56,7 @@ import { CountrySelectorComponent } from '../country-selector/country-selector.c
   host: {
     '[class.ipi-focused]': 'isFocused',
     '[class.ipi-disabled]': 'isDisabled',
+    '[class.ipi-invalid]': 'isInvalid',
   },
 })
 export class PhoneInputComponent
@@ -58,12 +65,14 @@ export class PhoneInputComponent
   @Input() defaultCountry?: CountryCode;
   @Input() placeholder = '';
   @Output() countryChange = new EventEmitter<CountryData>();
+  @Output() phoneStatus = new EventEmitter<PhoneStatus>();
 
   // --- Exposed state ---
   selectedCountry!: CountryData;
   maskOptions: { mask: string } | { mask: RegExp } = { mask: /^\d{1,15}$/ };
   isFocused = false;
   isDisabled = false;
+  isInvalid = false;
 
   // Internal FormControl holds unmasked digits (IMask writes the raw digits here)
   readonly inputCtrl = new FormControl('', { nonNullable: true });
@@ -175,11 +184,15 @@ export class PhoneInputComponent
 
   private emitParsedValue(raw: string): void {
     if (!raw?.trim()) {
+      this.isInvalid = false;
       this.onChange(null);
+      this.phoneStatus.emit({ isPossible: false, isValid: false, e164: null });
       return;
     }
-    const { valid, e164 } = this.phoneService.parse(raw, this.selectedCountry.iso);
+    const { valid, isPossible, e164 } = this.phoneService.parse(raw, this.selectedCountry.iso);
+    this.isInvalid = !valid;
     this.onChange(valid && e164 ? e164 : null);
+    this.phoneStatus.emit({ isPossible, isValid: valid, e164: valid ? e164 : null });
   }
 
   private updateMask(): void {
