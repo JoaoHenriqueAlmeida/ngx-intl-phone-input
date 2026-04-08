@@ -2,6 +2,9 @@
 
 > Accessible, headless Angular 17 international phone input with CDK-powered country selector.
 
+## Demo
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/~/github.com/JoaoHenriqueAlmeida/ngx-intl-phone-input)
+
 Built as a drop-in replacement for `ngx-intl-tel-input`, with fixes for known validation bugs with Suriname (+597) and Russia/Kazakhstan (+7) numbers.
 
 ## Installation

@@ -2,11 +2,13 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
   Output,
+  ViewChild,
   ViewEncapsulation,
   forwardRef,
   inject,
@@ -66,6 +68,8 @@ export class PhoneInputComponent
   @Input() placeholder = '';
   @Output() countryChange = new EventEmitter<CountryData>();
   @Output() phoneStatus = new EventEmitter<PhoneStatus>();
+
+  @ViewChild('phoneInput') private phoneInputRef!: ElementRef<HTMLInputElement>;
 
   // --- Exposed state ---
   selectedCountry!: CountryData;
@@ -165,6 +169,9 @@ export class PhoneInputComponent
     this.emitParsedValue(this.inputCtrl.value);
     this.onValidatorChange();
     this.cdr.markForCheck();
+
+    // Move focus to the phone input so the user can type immediately
+    this.phoneInputRef?.nativeElement.focus();
   }
 
   onFocus(): void {
