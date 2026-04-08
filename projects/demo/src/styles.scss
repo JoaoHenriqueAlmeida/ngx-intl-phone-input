@@ -1,1 +1,137 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+
+// ─── ipi-* library classes (global — overlay renders outside component tree) ──
+
+.ipi-country-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 100%;
+  padding: 0 0.6rem 0 0.75rem;
+  border: none;
+  border-right: 1px solid #e2e8f0;
+  background: #f8fafc;
+  cursor: pointer;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  color: #374151;
+
+  &:focus {
+    outline: none;
+    background: #eff6ff;
+  }
+
+  .ipi-flag {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
+  .ipi-dial-code {
+    font-size: 0.8rem;
+    color: #6b7280;
+  }
+}
+
+.ipi-phone-input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  padding: 0 0.75rem;
+  font-size: 0.9rem;
+  color: #1a1a1a;
+  background: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+}
+
+.ipi-dropdown-panel {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+  width: 280px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 320px;
+}
+
+.ipi-search-input {
+  padding: 0.6rem 0.75rem;
+  border: none;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 0.875rem;
+  color: #1a1a1a;
+  background: #f8fafc;
+
+  &:focus {
+    outline: none;
+    background: #eff6ff;
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+}
+
+.ipi-country-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.ipi-country-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+
+  &:hover,
+  &.ipi-country-option--active {
+    background: #eff6ff;
+  }
+
+  &.ipi-country-option--selected {
+    font-weight: 600;
+    color: #1d4ed8;
+  }
+
+  &__flag {
+    font-size: 1.1rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  &__name {
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__dial-code {
+    font-size: 0.75rem;
+    color: #6b7280;
+    flex-shrink: 0;
+  }
+}

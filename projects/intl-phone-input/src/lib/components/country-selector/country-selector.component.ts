@@ -49,7 +49,7 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy {
   // CDK
   private overlayRef!: OverlayRef;
   private portal!: TemplatePortal<void>;
-  keyManager!: ActiveDescendantKeyManager<CountryOptionDirective>;
+  keyManager: ActiveDescendantKeyManager<CountryOptionDirective> | undefined;
 
   // Registration array — populated by CountryOptionDirective self-registration.
   // @ViewChildren cannot cross CDK portal boundaries, so directives inject
@@ -75,11 +75,21 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy {
         .position()
         .flexibleConnectedTo(this.triggerRef)
         .withPositions([
-          { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' },
-          { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },
+          {
+            originX: 'start',
+            originY: 'bottom',
+            overlayX: 'start',
+            overlayY: 'top',
+          },
+          {
+            originX: 'start',
+            originY: 'top',
+            overlayX: 'start',
+            overlayY: 'bottom',
+          },
         ])
         .withFlexibleDimensions(false)
-        .withPush(false),
+        .withViewportMargin(8),
     });
 
     // Portal created once — OverlayRef.attach/detach reuses it safely.
@@ -88,7 +98,9 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy {
     this.overlayRef
       .backdropClick()
       .pipe(takeUntil(this.destroy$))
-      .subscribe(() => this.close());
+      .subscribe(() => {
+        this.close();
+      });
 
     this.overlayRef
       .detachments()
@@ -132,7 +144,11 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy {
   }
 
   onTriggerKeydown(event: KeyboardEvent): void {
-    if (event.key === ' ' || event.key === 'Enter' || event.key === 'ArrowDown') {
+    if (
+      event.key === ' ' ||
+      event.key === 'Enter' ||
+      event.key === 'ArrowDown'
+    ) {
       event.preventDefault();
       this.openDropdown();
     }
