@@ -1,0 +1,144 @@
+// ─── Layout ──────────────────────────────────────────────────────────────────
+
+.demo-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #1a1a1a;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.subtitle {
+  color: #666;
+  margin: 0 0 2rem;
+  font-size: 0.9rem;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: #333;
+}
+
+// ─── Cards ───────────────────────────────────────────────────────────────────
+
+.demo-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
+}
+
+// ─── Form fields ─────────────────────────────────────────────────────────────
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+
+  label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+}
+
+select {
+  height: 40px;
+  padding: 0 0.75rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  background: #fff;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgb(59 130 246 / 20%);
+  }
+}
+
+// ─── Phone input host ─────────────────────────────────────────────────────────
+
+.phone-field {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  border: 1px solid #cbd5e0;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+
+  &.ipi-focused {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgb(59 130 246 / 20%);
+  }
+
+  &.ipi-disabled {
+    background: #f7f7f7;
+    cursor: not-allowed;
+  }
+}
+
+// ─── Output panel ─────────────────────────────────────────────────────────────
+
+.output {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.output-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+
+  .label {
+    color: #6b7280;
+    min-width: 130px;
+  }
+
+  code {
+    font-family: 'SFMono-Regular', Consolas, monospace;
+    background: #e2e8f0;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #1a1a1a;
+  }
+}
+
+// ─── Bug examples list ────────────────────────────────────────────────────────
+
+ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+
+  li {
+    font-size: 0.875rem;
+    color: #374151;
+    line-height: 1.5;
+  }
+}

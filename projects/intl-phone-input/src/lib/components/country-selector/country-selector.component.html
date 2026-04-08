@@ -18,7 +18,8 @@
       class="ipi-search-input"
       type="text"
       [formControl]="searchCtrl"
-      autocomplete="off" />
+      autocomplete="off"
+      placeholder="Search countries…" />
     <ul class="ipi-country-list" role="listbox">
       @for (country of filteredCountries; track country.iso) {
         <li

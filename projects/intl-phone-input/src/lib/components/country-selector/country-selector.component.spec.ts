@@ -295,14 +295,14 @@ describe('CountrySelectorComponent', () => {
       const panel = getPanel()!;
       panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
       fixture.detectChanges();
-      expect(component.keyManager.activeItem).not.toBeNull();
+      expect(component.keyManager!.activeItem).not.toBeNull();
     });
 
     it('active option gains ipi-country-option--active class', () => {
       const panel = getPanel()!;
       panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
       fixture.detectChanges();
-      const activeId = component.keyManager.activeItem?.id;
+      const activeId = component.keyManager!.activeItem?.id;
       const activeEl = activeId ? document.getElementById(activeId) : null;
       expect(activeEl?.classList.contains('ipi-country-option--active')).toBe(true);
     });
@@ -322,7 +322,7 @@ describe('CountrySelectorComponent', () => {
       const panel = getPanel()!;
       panel.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }));
       fixture.detectChanges();
-      const activeId = component.keyManager.activeItem?.id;
+      const activeId = component.keyManager!.activeItem?.id;
       expect(getTrigger().getAttribute('aria-activedescendant')).toBe(activeId ?? null);
     });
 
