@@ -18,6 +18,7 @@ const config: Config = {
         ],
       },
       moduleNameMapper: {
+        '^angular-imask$': '<rootDir>/__mocks__/angular-imask.ts',
         'intl-phone-input': '<rootDir>/src/public-api.ts',
       },
       coverageDirectory: '<rootDir>/../../coverage/intl-phone-input',

@@ -1,0 +1,15 @@
+<ipi-country-selector
+  [selectedCountry]="selectedCountry"
+  (countryChange)="onCountrySelected($event)" />
+
+<input
+  class="ipi-phone-input"
+  type="tel"
+  inputmode="numeric"
+  [placeholder]="placeholder"
+  [disabled]="isDisabled"
+  [formControl]="inputCtrl"
+  [imask]="maskOptions"
+  [unmask]="true"
+  (focus)="onFocus()"
+  (blur)="onBlur()" />
