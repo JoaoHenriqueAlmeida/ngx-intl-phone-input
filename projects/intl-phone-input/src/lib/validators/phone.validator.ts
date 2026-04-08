@@ -1,7 +1,6 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { PhoneService } from '../services/phone.service';
 import { CountryCode } from '../types';
-import { isValidPhoneNumber } from 'libphonenumber-js';
 
 /**
  * Returns an Angular ValidatorFn that validates a phone number string
@@ -30,24 +29,7 @@ export function phoneValidator(
     // handle that separately if the consumer needs it.
     if (!value?.trim()) return null;
 
-    const { valid, phoneNumber, e164 } = phoneService.parse(
-      value,
-      getCountry(),
-    );
-
-    console.log(
-      getCountry(),
-      value,
-      valid,
-      e164,
-      phoneNumber,
-      phoneNumber?.isPossible(),
-      phoneNumber?.isValid(),
-      isValidPhoneNumber(value, getCountry()),
-      phoneNumber?.format('E.164'),
-      phoneNumber?.getType(),
-      phoneNumber?.getPossibleCountries(),
-    );
+    const { valid, e164 } = phoneService.parse(value, getCountry());
 
     return valid && e164 ? null : { invalidPhone: true };
   };
