@@ -55,7 +55,7 @@ describe('CountrySelectorComponent', () => {
 
   describe('trigger', () => {
     it('renders the selected country flag', () => {
-      expect(getTrigger().querySelector('.ipi-flag')?.textContent).toBe(brazil.flag);
+      expect((getTrigger().querySelector('.ipi-flag') as HTMLImageElement)?.src).toBe(brazil.flag);
     });
 
     it('renders the selected country dial code', () => {

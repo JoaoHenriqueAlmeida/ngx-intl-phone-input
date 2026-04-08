@@ -1,13 +1,7 @@
 import { CountryData } from '../types';
 
-/**
- * Derives a flag emoji from an ISO 3166-1 alpha-2 country code.
- * Uses Unicode Regional Indicator Symbols (U+1F1E6 to U+1F1FF).
- */
 function flag(iso: string): string {
-  return [...iso.toUpperCase()]
-    .map((c) => String.fromCodePoint(0x1f1a5 + c.charCodeAt(0)))
-    .join('');
+  return `https://cdn.kcak11.com/CountryFlags/countries/${iso.toLowerCase()}.svg`;
 }
 
 /**
