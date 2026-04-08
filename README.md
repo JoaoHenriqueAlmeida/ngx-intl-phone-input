@@ -1,4 +1,4 @@
-# intl-phone-input
+# ngx-intl-phone-input
 
 > Accessible, headless Angular 17 international phone input with CDK-powered country selector.
 
@@ -7,7 +7,7 @@ Built as a drop-in replacement for `ngx-intl-tel-input`, with fixes for known va
 ## Installation
 
 ```bash
-npm install intl-phone-input
+npm install ngx-intl-phone-input
 ```
 
 You also need the peer dependencies if not already installed:
