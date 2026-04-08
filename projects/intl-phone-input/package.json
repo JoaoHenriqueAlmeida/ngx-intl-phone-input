@@ -1,6 +1,6 @@
 {
   "name": "ngx-intl-phone-input",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Accessible, headless Angular 17 international phone input with country selector",
   "keywords": [
     "angular",
