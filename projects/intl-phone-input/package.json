@@ -1,5 +1,5 @@
 {
-  "name": "intl-phone-input",
+  "name": "ngx-intl-phone-input",
   "version": "0.1.0",
   "description": "Accessible, headless Angular 17 international phone input with country selector",
   "keywords": [
@@ -11,11 +11,11 @@
     "imask",
     "libphonenumber"
   ],
-  "author": "",
+  "author": "JoaoHenriqueAlmeida",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/JoaoHenriqueAlmeida/ngx-intl-phone-input"
   },
   "peerDependencies": {
     "@angular/common": "^17.0.0",
