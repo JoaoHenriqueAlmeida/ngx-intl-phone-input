@@ -61,5 +61,17 @@
         <code>{{ status?.e164 ?? "null" }}</code>
       </div>
     </div>
+
+    <div class="actions">
+      <button class="btn btn--primary" [disabled]="!status?.isValid" (click)="saveToStorage()">
+        Save to storage
+      </button>
+      <button class="btn btn--ghost" (click)="clearStorage()">
+        Clear
+      </button>
+      @if (saved) {
+        <span class="saved-hint">Saved!</span>
+      }
+    </div>
   </section>
 </div>

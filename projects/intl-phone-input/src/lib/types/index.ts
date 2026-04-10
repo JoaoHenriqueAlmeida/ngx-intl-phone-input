@@ -3,6 +3,12 @@ import { CountryCode } from 'libphonenumber-js';
 export type { CountryCode };
 
 /**
+ * Locales supported for country name translation.
+ * 'en-US' is the default (English). Add more entries as translations are added.
+ */
+export type SupportedLocale = 'en-US' | 'pt-BR';
+
+/**
  * Represents a single country entry in the selector.
  */
 export interface CountryData {

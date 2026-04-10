@@ -25,7 +25,7 @@ import {
 } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { IMaskDirective } from 'angular-imask';
-import { CountryData, CountryCode } from '../../types';
+import { CountryData, CountryCode, SupportedLocale } from '../../types';
 import { CountryService } from '../../services/country.service';
 import { PhoneService } from '../../services/phone.service';
 import { CountrySelectorComponent } from '../country-selector/country-selector.component';
@@ -66,6 +66,7 @@ export class PhoneInputComponent
 {
   @Input() defaultCountry?: CountryCode;
   @Input() placeholder = '';
+  @Input() locale: SupportedLocale = 'en-US';
   @Output() countryChange = new EventEmitter<CountryData>();
   @Output() phoneStatus = new EventEmitter<PhoneStatus>();
 
@@ -92,7 +93,7 @@ export class PhoneInputComponent
   private readonly cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
-    this.selectedCountry = this.countryService.resolveDefault(this.defaultCountry);
+    this.selectedCountry = this.countryService.resolveDefault(this.defaultCountry, this.locale);
     this.updateMask();
 
     // Apply any value that arrived via writeValue before ngOnInit ran
@@ -122,6 +123,20 @@ export class PhoneInputComponent
       this.pendingValue = value;
       return;
     }
+
+    // If the incoming value is an E.164 string, auto-detect and switch country.
+    if (value?.startsWith('+')) {
+      const detectedIso = this.phoneService.parseE164(value);
+      if (detectedIso) {
+        const detectedCountry = this.countryService.findByIso(detectedIso, this.locale);
+        if (detectedCountry && detectedCountry.iso !== this.selectedCountry.iso) {
+          this.selectedCountry = detectedCountry;
+          this.updateMask();
+          this.countryChange.emit(detectedCountry);
+        }
+      }
+    }
+
     const national = this.toNationalNumber(value, this.selectedCountry);
     this.inputCtrl.setValue(national, { emitEvent: false });
     this.cdr.markForCheck();
