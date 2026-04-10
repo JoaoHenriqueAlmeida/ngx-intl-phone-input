@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   parsePhoneNumberWithError,
+  parsePhoneNumber,
   isValidPhoneNumber,
   getExampleNumber,
   getCountryCallingCode,
@@ -67,6 +68,23 @@ export class PhoneService {
       };
     } catch {
       return { valid: false, isPossible: false, e164: null, phoneNumber: null };
+    }
+  }
+
+  /**
+   * Detects the country from an E.164 string (e.g. '+5511987654321' → 'BR').
+   * Returns undefined when the value is not a valid E.164 or the country
+   * cannot be determined.
+   *
+   * Used by the component's writeValue to auto-select the correct country
+   * when a pre-filled value arrives from the form.
+   */
+  parseE164(e164: string): CountryCode | undefined {
+    if (!e164?.startsWith('+')) return undefined;
+    try {
+      return parsePhoneNumber(e164).country as CountryCode | undefined;
+    } catch {
+      return undefined;
     }
   }
 

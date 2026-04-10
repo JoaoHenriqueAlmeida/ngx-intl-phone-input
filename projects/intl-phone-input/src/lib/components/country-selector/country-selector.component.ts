@@ -19,7 +19,7 @@ import { ActiveDescendantKeyManager } from '@angular/cdk/a11y';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Subject, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs';
-import { CountryData } from '../../types';
+import { CountryData, SupportedLocale } from '../../types';
 import { CountryService } from '../../services/country.service';
 import { CountryOptionDirective } from './country-option.directive';
 
@@ -33,6 +33,7 @@ import { CountryOptionDirective } from './country-option.directive';
 })
 export class CountrySelectorComponent implements AfterViewInit, OnDestroy {
   @Input({ required: true }) selectedCountry!: CountryData;
+  @Input() locale: SupportedLocale = 'en-US';
   @Output() countryChange = new EventEmitter<CountryData>();
 
   @ViewChild('trigger', { read: ElementRef })
@@ -64,7 +65,7 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy {
   private readonly countryService = inject(CountryService);
 
   ngAfterViewInit(): void {
-    this.filteredCountries = [...this.countryService.all];
+    this.filteredCountries = this.countryService.getAll(this.locale);
 
     // Build the overlay once — reused across open/close cycles.
     this.overlayRef = this.overlay.create({
@@ -190,12 +191,12 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy {
   private onDetach(): void {
     this.isOpen = false;
     this.searchCtrl.setValue('', { emitEvent: false });
-    this.filteredCountries = [...this.countryService.all];
+    this.filteredCountries = this.countryService.getAll(this.locale);
     this.cdr.markForCheck();
   }
 
   private updateFilter(query: string): void {
-    this.filteredCountries = this.countryService.search(query);
+    this.filteredCountries = this.countryService.search(query, this.locale);
     this.cdr.markForCheck();
   }
 
