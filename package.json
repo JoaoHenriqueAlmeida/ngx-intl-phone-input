@@ -1,6 +1,6 @@
 {
   "name": "ngx-intl-phone-input",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "build:lib": "ng build intl-phone-input",
     "watch:lib": "ng build intl-phone-input --watch",
