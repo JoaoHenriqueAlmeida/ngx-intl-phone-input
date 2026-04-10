@@ -23,6 +23,11 @@ import { CountryData, SupportedLocale } from '../../types';
 import { CountryService } from '../../services/country.service';
 import { CountryOptionDirective } from './country-option.directive';
 
+const SEARCH_PLACEHOLDER: Record<SupportedLocale, string> = {
+  'en-US': 'Search countries…',
+  'pt-BR': 'Buscar países…',
+};
+
 @Component({
   selector: 'ipi-country-selector',
   standalone: true,
@@ -35,6 +40,10 @@ export class CountrySelectorComponent implements AfterViewInit, OnDestroy {
   @Input({ required: true }) selectedCountry!: CountryData;
   @Input() locale: SupportedLocale = 'en-US';
   @Output() countryChange = new EventEmitter<CountryData>();
+
+  get searchPlaceholder(): string {
+    return SEARCH_PLACEHOLDER[this.locale] ?? SEARCH_PLACEHOLDER['en-US'];
+  }
 
   @ViewChild('trigger', { read: ElementRef })
   triggerRef!: ElementRef<HTMLButtonElement>;
